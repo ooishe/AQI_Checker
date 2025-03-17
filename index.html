@@ -30,8 +30,50 @@
     <h1>Welcome to HTML</h1>
     <div style="display: flex; ">
         <div style="display: flex; flex-direction: column;">
-            <div style="background-color: pink; height: 400px; width: 300px;"></div>
-            <div style="background-color: palegreen; height: 300px; width: 300px;"></div>
+            <div style="background-color: pink; height: 500px; width: 300px;"><h2 style="text-align: center;">Get Registered</h2>
+                <form action="process.js" style="margin-left: 30px;">
+                    <label for="uname">Full name: </label><br>
+                    <input type="text" id="fname" name="fname"><br>
+
+                    <label for="ugen">Gender: </label><br>
+                    <input type="radio" id="m" name="m" value="m">
+                    <label for="m">Male</label>
+                    <input type="radio" id="f" name="f" value="f">
+                    <label for="f">Female</label><br>
+
+                    <label for="umail">E-mail: </label><br>
+                    <input type="text" id="umail" name="umail" placeholder="abc@gmail.com"><br>
+                    <label for="upass">Password: </label><br>
+                    <input type="text" id="upass" name="upass"><br>
+                    <label for="cpass">Confirm password: </label><br>
+                    <input type="text" id="cpass" name="cpass"><br>
+
+                    <label for="bday">DoB: </label><br>
+                    <input type="date" id="bday" name="bday"><br>
+
+                    <label for="bgcolor">Select your bg color:</label>
+                    <input type="color" id="bgcolor" name="bgcolor"><br>
+
+                    <label for="count">Choose your country: </label><br>
+                    <select id="count" name="count">
+                        <option value="count1">Bangladesh</option>
+                        <option value="count2">Japan</option>
+                        <option value="count3">China</option>
+                    </select><br>
+
+                    <label for="phone">Enter a phone number:</label><br>
+                    <input type="tel" id="phone" name="phone" placeholder="123-45-678"><br><br>
+
+                    <input type="checkbox" id="tc" name="tc">
+                    <label for="tc"> I agree to the </label>
+                    <a href="https://www.youtube.com/">Terms & Conditions.</a><br><br>
+
+                    <input type= "Submit" value="Submit" name="Submit" >
+
+
+                </form>
+            </div>
+            <div style="background-color: palegreen; height: 200px; width: 300px;"></div>
         </div>
         <div style="background-color: skyblue; height: 700px; width: 300px;"></div>
     </div>
