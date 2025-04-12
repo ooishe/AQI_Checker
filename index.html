@@ -11,15 +11,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            /*height: 970px;*/
             margin: 0;
         }
         img {
-            width: 100px; 
-            height: 100px; 
+            width: 70px; 
+            height: 70px; 
             border-radius: 50%;
             object-fit: cover;
-            margin-top: 50px;
+            margin-top: 12px;
         }
         
     </style>
@@ -28,54 +28,121 @@
 
     <img src="logo.png" alt="logo" class="logo">
     <h1>Welcome to HTML</h1>
+    
     <div style="display: flex; ">
         <div style="display: flex; flex-direction: column;">
-            <div style="background-color: pink; height: 500px; width: 300px;"><h2 style="text-align: center;">Get Registered</h2>
-                <form action="process.js" style="margin-left: 30px;">
+            <div style="background-color: pink; height: 680px; width: 300px; font-size: large;"><h2 style="text-align: center;">Get Registered</h2>
+                <form action="" style="margin-left: 30px;">
                     <label for="uname">Full name: </label><br>
-                    <input type="text" id="fname" name="fname"><br>
+                    <input type="text" id="fname" name="fname" placeholder="Name" style="margin-bottom: 7px;" ><br>
 
                     <label for="ugen">Gender: </label><br>
-                    <input type="radio" id="m" name="m" value="m">
+                    <input type="radio" id="m" name="gen" value="m">
                     <label for="m">Male</label>
-                    <input type="radio" id="f" name="f" value="f">
+                    <input type="radio" id="f" name="gen" value="f"  style="margin-bottom: 7px;">
                     <label for="f">Female</label><br>
 
                     <label for="umail">E-mail: </label><br>
-                    <input type="text" id="umail" name="umail" placeholder="abc@gmail.com"><br>
+                    <input type="text" id="umail" name="umail" placeholder="abc@gmail.com" style="margin-bottom: 7px;" ><br>
+
                     <label for="upass">Password: </label><br>
-                    <input type="text" id="upass" name="upass"><br>
+                    <input type="text" id="upass" name="upass"  style="margin-bottom: 7px;"><br>
                     <label for="cpass">Confirm password: </label><br>
-                    <input type="text" id="cpass" name="cpass"><br>
+                    <input type="text" id="cpass" name="cpass" style="margin-bottom: 7px;"><br>
 
                     <label for="bday">DoB: </label><br>
-                    <input type="date" id="bday" name="bday"><br>
+                    <input type="date" id="bday" name="bday" style="margin-bottom: 7px;"><br>
 
                     <label for="bgcolor">Select your bg color:</label>
-                    <input type="color" id="bgcolor" name="bgcolor"><br>
+                    <input type="color" id="bgcolor" name="bgcolor" style="margin-bottom: 7px;"><br>
 
                     <label for="count">Choose your country: </label><br>
-                    <select id="count" name="count">
+                    <select id="count" name="count" style="margin-bottom: 7px;">
                         <option value="count1">Bangladesh</option>
                         <option value="count2">Japan</option>
                         <option value="count3">China</option>
                     </select><br>
 
-                    <label for="phone">Enter a phone number:</label><br>
-                    <input type="tel" id="phone" name="phone" placeholder="123-45-678"><br><br>
+                    <label for="phone">Give us your feedback:</label><br>
+                    <input type="tel" id="phone" name="phone" placeholder="Comments." ><br><br>
 
                     <input type="checkbox" id="tc" name="tc">
                     <label for="tc"> I agree to the </label>
                     <a href="https://www.youtube.com/">Terms & Conditions.</a><br><br>
 
-                    <input type= "Submit" value="Submit" name="Submit" >
+                    <input type= "Submit" value="Submit" name="Submit" style="background-color: lightsteelblue; font-size: large; border-radius: 10%; padding: 7px 7px; cursor: pointer;" onclick="return validate()">
 
+                    <div id="data" style="color: red;" ></div>
 
                 </form>
+
+                <script>
+                    
+                    function validate() {
+                        let n = document.getElementById('fname'); // dom object 
+                        let dob = document.getElementById('bday');
+                        let email = document.getElementById("umail");
+                        let pass = document.getElementById("upass");
+                        let cpass = document.getElementById("cpass");
+                        let genM = document.getElementById("m");
+                        let genF = document.getElementById("f");
+                        let country = document.getElementById("count");
+                        let agree = document.getElementById("tc");
+                        if (n.value.trim() === "" || !/^[A-Za-z.\-]+$/.test(n.value))
+                        {
+                            document.getElementById('data').innerHTML="Name cannot be empty or contain numbers or special characters.";
+                            return false;
+                        }
+
+                        if (!genM.checked && !genF.checked) {
+                            document.getElementById('data').innerHTML = "Please select a gender.";
+                            return false;
+                        }
+                        if (genM.checked && genF.checked) {
+                            document.getElementById('data').innerHTML = "Please select A gender.";
+                            return false;
+                        }
+                                                
+                        if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(gmail\.com|yahoo\.com|hotmail\.com)$/.test(email.value)) {
+                            document.getElementById('data').innerHTML = "Enter correct e-mail";
+                            return false;
+                        }
+
+                        if (pass.value.length < 8 || !/\d/.test(pass.value)) {
+                            document.getElementById('data').innerHTML = "Password must be at least 8 characters & contain alphanumerics.";
+                            return false;
+                        }
+
+                        if (pass.value !== cpass.value ) {
+                            document.getElementById('data').innerHTML = "Passwords do not match.";
+                            return false;
+                        }
+
+                        let ageval = new Date(dob.value);
+                        let today = new Date();
+                        let age = today.getFullYear()-ageval.getFullYear();
+
+                        if (!dob.value) {
+                            document.getElementById('data').innerHTML = "Please enter date of birth.";
+                            return false;
+                        }
+                        if (age < 18) {
+                            document.getElementById('data').innerHTML = "You must be at least 18 years old to register.";
+                            return false;
+                        }
+
+                        if (!agree.checked) {
+                            document.getElementById('data').innerHTML = "You must agree to the Terms & Conditions.";
+                            return false;
+                        }
+                        
+                    }
+                </script>
             </div>
-            <div style="background-color: palegreen; height: 200px; width: 300px;"></div>
+            
+            <div style="background-color: palegreen; height: 120px; width: 300px;"></div>
         </div>
-        <div style="background-color: skyblue; height: 700px; width: 300px;"></div>
+        <div style="background-color: skyblue; height: 800px; width: 300px;"></div>
     </div>
     
 
@@ -83,3 +150,4 @@
     
 </body>
 </html>
+
