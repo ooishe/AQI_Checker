@@ -3,37 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Tech LAB 01</title>
-    <link rel="icon" type="image.ico" href="iconfav.png"> 
+    <title>AQI</title>
+    <link rel="icon" type="image.ico" href="uhh.jpeg"> 
+    <link rel="stylesheet" href="aqi.css"> 
     <style>
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /*height: 970px;*/
             margin: 0;
         }
         img {
-            width: 70px; 
-            height: 70px; 
-            border-radius: 50%;
+            width: 80px; 
+            height: 80px; 
             object-fit: cover;
-            margin-top: 12px;
+            margin-top: 20px;
         }
         
     </style>
 </head>
 <body>
 
-    <img src="logo.png" alt="logo" class="logo">
-    <h1>Welcome to HTML</h1>
+    <img src="uhh.jpeg" alt="logo" class="logo">
+    <h1 style="color: darkslateblue;">Air Quality Index</h1>
     
     <div style="display: flex; ">
         <div style="display: flex; flex-direction: column;">
-            <div style="background-color: pink; height: 680px; width: 300px; font-size: large;"><h2 style="text-align: center;">Get Registered</h2>
-                <form action="" style="margin-left: 30px;">
-                    <label for="uname">Full name: </label><br>
+            <div style="background-color: pink; height: 650px; width: 400px; font-size: large;"><h2 style="text-align: center;">Get Registered</h2>
+                <form action="showData.php" method="post" style="margin-left: 30px;">
+                    <label for="fname">Full name: </label><br>
                     <input type="text" id="fname" name="fname" placeholder="Name" style="margin-bottom: 7px;" ><br>
 
                     <label for="ugen">Gender: </label><br>
@@ -46,9 +45,9 @@
                     <input type="text" id="umail" name="umail" placeholder="abc@gmail.com" style="margin-bottom: 7px;" ><br>
 
                     <label for="upass">Password: </label><br>
-                    <input type="text" id="upass" name="upass"  style="margin-bottom: 7px;"><br>
+                    <input type="password" id="upass" name="upass"  style="margin-bottom: 7px;"><br>
                     <label for="cpass">Confirm password: </label><br>
-                    <input type="text" id="cpass" name="cpass" style="margin-bottom: 7px;"><br>
+                    <input type="password" id="cpass" name="cpass" style="margin-bottom: 7px;"><br>
 
                     <label for="bday">DoB: </label><br>
                     <input type="date" id="bday" name="bday" style="margin-bottom: 7px;"><br>
@@ -63,8 +62,8 @@
                         <option value="count3">China</option>
                     </select><br>
 
-                    <label for="phone">Give us your feedback:</label><br>
-                    <input type="tel" id="phone" name="phone" placeholder="Comments." ><br><br>
+                    <label for="comm">Give us your feedback:</label><br>
+                    <textarea id="comm" name="comm" placeholder="Comments." ></textarea><br><br>
 
                     <input type="checkbox" id="tc" name="tc">
                     <label for="tc"> I agree to the </label>
@@ -88,7 +87,7 @@
                         let genF = document.getElementById("f");
                         let country = document.getElementById("count");
                         let agree = document.getElementById("tc");
-                        if (n.value.trim() === "" || !/^[A-Za-z.\-]+$/.test(n.value))
+                        if (n.value.trim() === "" || /\d/.test(n.value) || /^[.-]+$/.test(n.value))
                         {
                             document.getElementById('data').innerHTML="Name cannot be empty or contain numbers or special characters.";
                             return false;
@@ -96,10 +95,6 @@
 
                         if (!genM.checked && !genF.checked) {
                             document.getElementById('data').innerHTML = "Please select a gender.";
-                            return false;
-                        }
-                        if (genM.checked && genF.checked) {
-                            document.getElementById('data').innerHTML = "Please select A gender.";
                             return false;
                         }
                                                 
@@ -140,12 +135,91 @@
                 </script>
             </div>
             
-            <div style="background-color: palegreen; height: 120px; width: 300px;"></div>
-        </div>
-        <div style="background-color: skyblue; height: 800px; width: 300px;"></div>
-    </div>
-    
+            <div style="background-color: thistle; height: 300px; width: 400px; font-size: large;"><h2 style="text-align: center;">LogIn</h2>
+                <form id="loginform" action="", style="margin-left: 30px;">
+                    <label for="uname">Username: </label><br>
+                    <input type="text" id="uname" name="uname" style="margin-bottom: 15px; ;" placeholder="Type your Username" ><br>
 
+                    <label for="pass">Password: </label><br>
+                    <input type="password" id="pass" name="pass" placeholder="Type your Password" style="margin-bottom: 20px;" ><br>
+                    <div style="text-align: center;">
+                        <input type= "submit" value="Login" name="login" style="background-color: lightsteelblue; font-size: large; border-radius: 5%; padding: 2px 7px; cursor: pointer;" onclick="">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div style="background-color: lavender; height: 950px; width: 500px;">
+            <h2 style="text-align: center; margin-top: 20px;" id="welcomeMessage">Welcome, User!</h2>
+            <table id="aqiTable" style="width: 100%; margin: 20px auto; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>AQI Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>Dhaka</td>
+                        <td>95</td>
+                    </tr>
+                    <tr>
+                        <td>Tokyo</td>
+                        <td>80</td>
+                    </tr>
+                    <tr>
+                        <td>New York</td>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <td>Beijing</td>
+                        <td>120</td>
+                    </tr>
+                    <tr>
+                        <td>Paris</td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>Berlin</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>London</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td>Sydney</td>
+                        <td>90</td>
+                    </tr>
+                    <tr>
+                        <td>Mumbai</td>
+                        <td>110</td>
+                    </tr>
+                    <tr>
+                        <td>Toronto</td>
+                        <td>40</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </div>
+  
+    <script>
+        // Handle login form submission
+        document.getElementById("loginform").onsubmit = function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var username = document.getElementById("uname").value;
+
+            if (username.trim() !== "") {
+                // Display welcome message with username
+                document.getElementById("welcomeMessage").innerText = "Welcome, " + username + "!";
+                document.getElementById("lavenderDiv").style.display = "block"; // Show the lavender div
+            } else {
+                alert("Please enter a valid username.");
+            }
+        };
+    </script>
     
     
 </body>
