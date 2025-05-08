@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AQI</title>
-    <link rel="icon" type="image.ico" href="uhh.jpeg"> 
-    <link rel="stylesheet" href="aqi.css"> 
+    <link rel="icon" type="image.ico" href="uhh.jpeg">
+    <link rel="stylesheet" href="aqi.css">
     <style>
         body {
             display: flex;
@@ -14,38 +15,41 @@
             justify-content: center;
             margin: 0;
         }
+
         img {
-            width: 80px; 
-            height: 80px; 
+            width: 80px;
+            height: 80px;
             object-fit: cover;
             margin-top: 20px;
         }
-        
     </style>
 </head>
+
 <body>
 
     <img src="uhh.jpeg" alt="logo" class="logo">
     <h1 style="color: darkslateblue;">Air Quality Index</h1>
-    
+
     <div style="display: flex; ">
         <div style="display: flex; flex-direction: column;">
-            <div style="background-color: pink; height: 650px; width: 400px; font-size: large;"><h2 style="text-align: center;">Get Registered</h2>
-                <form action="showData.php" method="post" style="margin-left: 30px;">
+            <div style="background-color: pink; height: 650px; width: 400px; font-size: large;">
+                <h2 style="text-align: center;">Get Registered</h2>
+                <form action="showData.php" method="post" style="margin-left: 30px;" onsubmit="return validate()">
                     <label for="fname">Full name: </label><br>
-                    <input type="text" id="fname" name="fname" placeholder="Name" style="margin-bottom: 7px;" ><br>
+                    <input type="text" id="fname" name="fname" placeholder="Name" style="margin-bottom: 7px;"><br>
 
                     <label for="ugen">Gender: </label><br>
                     <input type="radio" id="m" name="gen" value="m">
                     <label for="m">Male</label>
-                    <input type="radio" id="f" name="gen" value="f"  style="margin-bottom: 7px;">
+                    <input type="radio" id="f" name="gen" value="f" style="margin-bottom: 7px;">
                     <label for="f">Female</label><br>
 
                     <label for="umail">E-mail: </label><br>
-                    <input type="text" id="umail" name="umail" placeholder="abc@gmail.com" style="margin-bottom: 7px;" ><br>
+                    <input type="text" id="umail" name="umail" placeholder="abc@gmail.com"
+                        style="margin-bottom: 7px;"><br>
 
                     <label for="upass">Password: </label><br>
-                    <input type="password" id="upass" name="upass"  style="margin-bottom: 7px;"><br>
+                    <input type="password" id="upass" name="upass" style="margin-bottom: 7px;"><br>
                     <label for="cpass">Confirm password: </label><br>
                     <input type="password" id="cpass" name="cpass" style="margin-bottom: 7px;"><br>
 
@@ -57,26 +61,28 @@
 
                     <label for="count">Choose your country: </label><br>
                     <select id="count" name="count" style="margin-bottom: 7px;">
-                        <option value="count1">Bangladesh</option>
-                        <option value="count2">Japan</option>
-                        <option value="count3">China</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="Japan">Japan</option>
+                        <option value="China">China</option>
                     </select><br>
 
                     <label for="comm">Give us your feedback:</label><br>
-                    <textarea id="comm" name="comm" placeholder="Comments." ></textarea><br><br>
+                    <textarea id="comm" name="comm" placeholder="Comments."></textarea><br><br>
 
                     <input type="checkbox" id="tc" name="tc">
                     <label for="tc"> I agree to the </label>
                     <a href="https://www.youtube.com/">Terms & Conditions.</a><br><br>
 
-                    <input type= "Submit" value="Submit" name="Submit" style="background-color: lightsteelblue; font-size: large; border-radius: 10%; padding: 7px 7px; cursor: pointer;" onclick="return validate()">
+                    <input type="Submit" value="Submit" name="Submit"
+                        style="background-color: lightsteelblue; font-size: large; border-radius: 10%; padding: 7px 7px; cursor: pointer;"
+                        onclick="return validate()">
 
-                    <div id="data" style="color: red;" ></div>
+                    <div id="data" style="color: red;"></div>
 
                 </form>
 
                 <script>
-                    
+
                     function validate() {
                         let n = document.getElementById('fname'); // dom object 
                         let dob = document.getElementById('bday');
@@ -85,11 +91,11 @@
                         let cpass = document.getElementById("cpass");
                         let genM = document.getElementById("m");
                         let genF = document.getElementById("f");
-                        let country = document.getElementById("count");
+                        let country = document.getElementById("count").value;
+                        let color = document.getElementById("bgcolor")
                         let agree = document.getElementById("tc");
-                        if (n.value.trim() === "" || /\d/.test(n.value) || /^[.-]+$/.test(n.value))
-                        {
-                            document.getElementById('data').innerHTML="Name cannot be empty or contain numbers or special characters.";
+                        if (n.value.trim() === "" || /\d/.test(n.value) || /^[.-]+$/.test(n.value)) {
+                            document.getElementById('data').innerHTML = "Name cannot be empty or contain numbers or special characters.";
                             return false;
                         }
 
@@ -97,7 +103,7 @@
                             document.getElementById('data').innerHTML = "Please select a gender.";
                             return false;
                         }
-                                                
+
                         if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(gmail\.com|yahoo\.com|hotmail\.com)$/.test(email.value)) {
                             document.getElementById('data').innerHTML = "Enter correct e-mail";
                             return false;
@@ -108,14 +114,14 @@
                             return false;
                         }
 
-                        if (pass.value !== cpass.value ) {
+                        if (pass.value !== cpass.value) {
                             document.getElementById('data').innerHTML = "Passwords do not match.";
                             return false;
                         }
 
                         let ageval = new Date(dob.value);
                         let today = new Date();
-                        let age = today.getFullYear()-ageval.getFullYear();
+                        let age = today.getFullYear() - ageval.getFullYear();
 
                         if (!dob.value) {
                             document.getElementById('data').innerHTML = "Please enter date of birth.";
@@ -130,20 +136,24 @@
                             document.getElementById('data').innerHTML = "You must agree to the Terms & Conditions.";
                             return false;
                         }
-                        
                     }
                 </script>
             </div>
-            
-            <div style="background-color: thistle; height: 300px; width: 400px; font-size: large;"><h2 style="text-align: center;">LogIn</h2>
-                <form id="loginform" action="", style="margin-left: 30px;">
+
+            <div style="background-color: thistle; height: 300px; width: 400px; font-size: large;">
+                <h2 style="text-align: center;">LogIn</h2>
+                <form id="loginform" action="" , style="margin-left: 30px;">
                     <label for="uname">Username: </label><br>
-                    <input type="text" id="uname" name="uname" style="margin-bottom: 15px; ;" placeholder="Type your Username" ><br>
+                    <input type="text" id="uname" name="uname" style="margin-bottom: 15px; ;"
+                        placeholder="Type your Username"><br>
 
                     <label for="pass">Password: </label><br>
-                    <input type="password" id="pass" name="pass" placeholder="Type your Password" style="margin-bottom: 20px;" ><br>
+                    <input type="password" id="pass" name="pass" placeholder="Type your Password"
+                        style="margin-bottom: 20px;"><br>
                     <div style="text-align: center;">
-                        <input type= "submit" value="Login" name="login" style="background-color: lightsteelblue; font-size: large; border-radius: 5%; padding: 2px 7px; cursor: pointer;" onclick="">
+                        <input type="submit" value="Login" name="login"
+                            style="background-color: lightsteelblue; font-size: large; border-radius: 5%; padding: 2px 7px; cursor: pointer;"
+                            onclick="">
                     </div>
                 </form>
             </div>
@@ -201,27 +211,27 @@
                     </tr>
                 </tbody>
             </table>
-        </div> 
+        </div>
     </div>
-  
+
     <script>
-        // Handle login form submission
-        document.getElementById("loginform").onsubmit = function(event) {
-            event.preventDefault(); // Prevent form submission
+        //login form submission
+        document.getElementById("loginform").onsubmit = function (event) {
+            event.preventDefault();
 
             var username = document.getElementById("uname").value;
 
             if (username.trim() !== "") {
                 // Display welcome message with username
                 document.getElementById("welcomeMessage").innerText = "Welcome, " + username + "!";
-                document.getElementById("lavenderDiv").style.display = "block"; // Show the lavender div
+                document.getElementById("lavenderDiv").style.display = "block";
             } else {
                 alert("Please enter a valid username.");
             }
         };
     </script>
-    
-    
-</body>
-</html>
 
+
+</body>
+
+</html>
